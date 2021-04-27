@@ -15,15 +15,17 @@ const Dashboard = () => {
     useEffect(() => {
         socket.on('payload', payload => {
             console.log(payload)
+
             setData(currentData => [...currentData, payload])
             console.log(payload)
             x = payload.X;
             y = payload.Y;
         })
     }, [])
-    if (data.length > 10) {
-        data.shift()
-    }
+    /*     if (data.length > 10) {
+            console.log("data: ", data)
+            data.shift()
+        } */
 
     return <div>
         <h1 className="title">10. csapat</h1>
@@ -32,9 +34,8 @@ const Dashboard = () => {
             <Card name="Y" icon="fas fa-map-marker-alt fa-2x" value={y} />
         </div>
         <div className="chart-container">
-            <Chart name="X" data={data} xDataKey="date" yDataKey="X" stroke="#8884d8"
+            <Chart name="Position" data={data} xDataKey="X" yDataKey="Y" stroke="#8884d8"
                 fill="#8884d8" />
-            <Chart name="Y" data={data} xDataKey="date" yDataKey="Y" stroke="#82ca9d" fill="#82ca9d" />
         </div>
     </div>
 }
